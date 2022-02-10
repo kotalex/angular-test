@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { CreateEditUserComponent } from './components/create-edit-user/create-edit-user.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { CreateEditUserComponent } from './components/create-edit-user/create-ed
   ],
   imports: [
     CommonModule,
+    SharedModule,
     UsersRoutingModule
   ]
 })
