@@ -1,0 +1,23 @@
+<div class="main-container">
+    <mat-toolbar color="primary">
+        <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Home</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button>
+          <mat-icon>person</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-drawer-container class="example-container">
+        <mat-drawer class="sidebar" mode="side" opened>
+            <app-sidebar></app-sidebar>
+        </mat-drawer>
+        <mat-drawer-content>
+            <div class="page-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

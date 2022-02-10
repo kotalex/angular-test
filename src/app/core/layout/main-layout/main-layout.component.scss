@@ -1,0 +1,16 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-container {
+    min-height: 100vh;
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .page-content {
+        padding: 1rem;
+        background: white;
+    }
+}
