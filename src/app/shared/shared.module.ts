@@ -9,8 +9,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
+import { MatTableModule } from '@angular/material/table';
+import { DataTableComponent } from './components/data-table/data-table.component';
+
+const components = [
+  DataTableComponent
+];
 
 const modules = [
   CommonModule,
@@ -21,17 +29,21 @@ const modules = [
   MatToolbarModule,
   MatMenuModule,
   MatListModule,
+  MatCardModule,
   MatSidenavModule,
   MatIconModule,
   MatButtonModule,
+  MatSnackBarModule,
+  MatTableModule
 ];
 
 
 @NgModule({
-  declarations: [],
+  declarations: components,
   imports: modules,
   exports: [
     ...modules,
+    ...components
   ]  
 })
 export class SharedModule { }

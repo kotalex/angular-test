@@ -1,1 +1,7 @@
-<p>users-list works!</p>
+<app-data-table title="Users" 
+                [loaded]="loaded"
+                [dataSource]="users$"
+                [columns]="columns"
+                [displayedColumns]="displayedColumns"
+                [addButton]="addButton">
+</app-data-table>

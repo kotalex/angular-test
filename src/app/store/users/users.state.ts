@@ -3,7 +3,7 @@ import { State, Action, Selector, StateContext } from '@ngxs/store';
 import { GetUsers, GetUsersSuccess, GetUsersFail } from './users.actions';
 
 import { tap } from 'rxjs';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/core/services/users.service';
 
 import User from 'src/app/core/models/user.model';
 
