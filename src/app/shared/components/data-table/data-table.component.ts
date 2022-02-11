@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -14,10 +14,14 @@ export class DataTableComponent implements OnInit {
   @Input('columns') columns!: string[];
   @Input('displayedColumns') displayedColumns!: string[];
   @Input('addButton') addButton!: { link: string; text: string };
+  @Output() addButtonClick = new EventEmitter<void>();
+  @Output() editButtonClick = new EventEmitter<any>();
+  @Output() deleteButtonClick = new EventEmitter<any>();
 
   constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.displayedColumns = [...this.displayedColumns, 'actions'];
+    this.columns = [...this.columns, 'Actions'];
   }
-
 }

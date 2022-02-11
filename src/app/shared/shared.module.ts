@@ -14,6 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+
 import { DataTableComponent } from './components/data-table/data-table.component';
 
 const components = [
@@ -34,7 +38,10 @@ const modules = [
   MatIconModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatSelectModule
 ];
 
 

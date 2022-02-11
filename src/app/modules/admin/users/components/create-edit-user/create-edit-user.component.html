@@ -1,1 +1,87 @@
-<p>create-edit-user works!</p>
+<mat-card>
+    <mat-card-title>{{ (single$ | async) ? 'Editing User: ' + (single$ | async)?.firstName : 'Add User' }}</mat-card-title>
+    <mat-card-title>
+        <button mat-icon-button aria-label="Go back" (click)="goBack()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+    </mat-card-title>    
+    <mat-card-content>
+        <form [formGroup]="form" (submit)="onSubmit()">
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                    <mat-error *ngIf="form.get('firstName')?.errors && form.get('firstName')?.hasError('required')">
+                        First name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-error *ngIf="form.get('lastName')?.errors && form.get('lastName')?.hasError('required')">
+                        Last name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>mail</mat-icon>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('email')">
+                        Invalid email
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role">
+                      <mat-option value="admin">Admin</mat-option>
+                      <mat-option value="user">User</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('role')?.errors && form.get('role')?.hasError('required')">
+                        Please select role
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>lock</mat-icon>
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password">
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('required')">
+                        Password is required
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('minLength')">
+                        Password must be at least 8 characters long
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-icon matSuffix>lock</mat-icon>
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" matInput formControlName="confirmPassword">
+                    <mat-error *ngIf="form.get('confirmPassword')?.errors && form.get('confirmPassword')?.hasError('required')">
+                        Please confirm password
+                    </mat-error> 
+                    <mat-error *ngIf="form.get('confirmPassword')?.errors && form.get('confirmPassword')?.hasError('matching')">
+                        Passwords do not match
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="left" style="margin-top: 1rem">
+                <button type="submit" mat-raised-button color="primary">Submit</button>
+            </div>
+        </form>        
+    </mat-card-content>
+</mat-card>

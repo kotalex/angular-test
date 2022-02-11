@@ -3,5 +3,8 @@
                 [dataSource]="users$"
                 [columns]="columns"
                 [displayedColumns]="displayedColumns"
-                [addButton]="addButton">
+                [addButton]="addButton"
+                (addButtonClick)="createUser()"
+                (editButtonClick)="editUser($event)"
+                (deleteButtonClick)="deleteUser($event)">
 </app-data-table>

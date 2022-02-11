@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { GetUsers, GetUsersSuccess, GetUsersFail } from './users.actions';
+import { GetUsers, GetUsersSuccess, GetUsersFail, SetSingleUser } from './users.actions';
 
 import { tap } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users.service';
@@ -9,7 +9,7 @@ import User from 'src/app/core/models/user.model';
 
 export interface UsersStateModel {
     list: User[];
-    single?: User;
+    single: User | null;
     loading: boolean;
     loaded: boolean;
 }
@@ -18,7 +18,7 @@ export interface UsersStateModel {
   name: 'users',
   defaults: {
     list: [],
-    single: undefined,
+    single: null,
     loading: false,
     loaded: false
   }
@@ -35,6 +35,11 @@ export class UsersState {
     @Selector() 
     static loaded(state: UsersStateModel) {
         return state.loaded;
+    }
+
+    @Selector()
+    static single(state: UsersStateModel) {
+        return state.single;
     }
 
     @Action(GetUsers)
@@ -65,5 +70,10 @@ export class UsersState {
             loaded: false,
             loading: false
         })
+    }
+
+    @Action(SetSingleUser)
+    setSingleUser(ctx: StateContext<UsersStateModel>, action: SetSingleUser) {
+        ctx.patchState({ single: action.payload });
     }
 }
