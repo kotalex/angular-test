@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { User } from 'server/dist/modules/users/schemas/user.schema';
+import User from 'src/app/core/models/user.model';
 import { passwordMatchValidator } from 'src/app/core/validators/password-match.validator';
 import { UsersState } from 'src/app/store/users/users.state';
 
@@ -27,8 +27,8 @@ export class CreateEditUserComponent implements OnInit {
       lastName: new FormControl(user ? user.lastName : '', [Validators.required]),
       email: new FormControl(user ? user.email : '', [Validators.required, Validators.email]),
       role: new FormControl(user ? user.role : '', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required, passwordMatchValidator('password')]),      
+      password: new FormControl('', !user ? [Validators.required, Validators.minLength(8)] : []),
+      confirmPassword: new FormControl('', !user ? [Validators.required, passwordMatchValidator('password')] : []),
     });
   }
 
