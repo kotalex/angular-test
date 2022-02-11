@@ -24,7 +24,9 @@ export class UsersService {
   }
 
   getUserByEmail(email: string) {
-    return this.userModel.findOne({ email });
+    return this.userModel
+      .findOne({ email })
+      .select(['_id', 'firstName', 'lastName', 'email', 'role', 'password']);
   }
 
   async createUser(dto: CreateUserDto) {
