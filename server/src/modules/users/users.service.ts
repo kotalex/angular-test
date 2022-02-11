@@ -19,6 +19,10 @@ export class UsersService {
     return this.userModel.find().sort({ createdAt: -1 });
   }
 
+  getUserById(id: string) {
+    return this.userModel.findById(id);
+  }
+
   getUserByEmail(email: string) {
     return this.userModel.findOne({ email });
   }
