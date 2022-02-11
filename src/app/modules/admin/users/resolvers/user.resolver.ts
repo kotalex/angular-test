@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { first, Observable, of, switchMap } from 'rxjs';
 import User from 'src/app/core/models/user.model';
-import { SetSingleUser } from 'src/app/store/users/users.actions';
+import { GetUsers, SetSingleUser } from 'src/app/store/users/users.actions';
 import { UsersState } from 'src/app/store/users/users.state';
 
 @Injectable({
@@ -19,8 +19,21 @@ export class UserResolver implements Resolve<User> {
   constructor(private store: Store) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
-    this.store.dispatch(new SetSingleUser(route.paramMap.get('id')));
+    const users: User[] = this.store.selectSnapshot(UsersState.users);
+    if (!users.length) {
+      return this.store.dispatch(new GetUsers())
+        .pipe(
+          first(),
+          switchMap(() => {
+            this.store.dispatch(new SetSingleUser(route.paramMap.get('id')));
 
-    return this.store.selectOnce(UsersState.single);
+            return this.store.selectOnce(UsersState.single);
+          })
+        );        
+    } else {
+      this.store.dispatch(new SetSingleUser(route.paramMap.get('id')));
+
+      return this.store.selectOnce(UsersState.single);
+    }
   }
 }
