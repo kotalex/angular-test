@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,10 +16,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
+import { AlertComponent } from './components/alert/alert.component';
 import { DataTableComponent } from './components/data-table/data-table.component';
 
 const components = [
+  AlertComponent,
   DataTableComponent
 ];
 
@@ -41,7 +43,8 @@ const modules = [
   MatTableModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 ];
 
 
@@ -51,6 +54,7 @@ const modules = [
   exports: [
     ...modules,
     ...components
-  ]  
+  ],
+  entryComponents: components
 })
 export class SharedModule { }

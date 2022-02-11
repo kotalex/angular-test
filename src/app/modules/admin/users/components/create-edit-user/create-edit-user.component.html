@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title>{{ (single$ | async) ? 'Editing User: ' + (single$ | async)?.firstName : 'Add User' }}</mat-card-title>
+    <mat-card-title>{{ user ? 'Editing User: ' + user.firstName : 'Add User' }}</mat-card-title>
     <mat-card-title>
         <button mat-icon-button aria-label="Go back" (click)="goBack()">
             <mat-icon>keyboard_arrow_left</mat-icon>

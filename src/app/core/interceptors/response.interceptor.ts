@@ -18,7 +18,8 @@ export class ResponseInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error) => {
-        const message: string = error.status >= 500 ? 'Server error' : error.message;
+        console.log(error);
+        const message: string = error.status >= 500 ? 'Server error' : error.error.message;
 
         this.snackBar.open(message, 'x', {
           duration: 3000,
@@ -28,23 +29,7 @@ export class ResponseInterceptor implements HttpInterceptor {
         })
 
         return throwError(() => new Error(error.message))
-      }),
-      // tap({
-      //   next: (event) => (event instanceof HttpResponse ? console.log('ev: ', event) : ''),
-        
-      //   error: (error) => {
-      //     const message: string = error.status >= 500 ? 'Server error' : error.message;
-
-      //     this.snackBar.open(message, 'x', {
-      //       duration: 3000,
-      //       verticalPosition: 'top',
-      //       horizontalPosition: 'right',
-      //       panelClass: 'error-snackbar'
-      //     })
-
-      //     return throwError(() => new Error(error.message))
-      //   }
-      // }),
+      })
     );
   }
 }
