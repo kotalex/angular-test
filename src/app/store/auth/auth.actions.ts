@@ -11,3 +11,7 @@ export class StoreUser {
     constructor(public payload: User) {}
 }
 
+export class LogoutUser {
+    static readonly type = '[Auth] Logout User';
+}
+

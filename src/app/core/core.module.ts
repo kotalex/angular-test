@@ -5,6 +5,7 @@ import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from '../shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -19,7 +20,12 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: ResponseInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ]
 })
 export class CoreModule { }

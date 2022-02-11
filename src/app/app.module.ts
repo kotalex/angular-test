@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from './store';
 import { environment } from 'src/environments/environment';
-
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxsModule.forRoot(AppState, { developmentMode: !environment.production }),
+    NgxsRouterPluginModule.forRoot(),
     CoreModule,
   ],
   providers: [],

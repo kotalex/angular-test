@@ -5,7 +5,7 @@ import { HomeModule } from './home/home.module';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => HomeModule
+    loadChildren: () => HomeModule    
   }
 ];
 

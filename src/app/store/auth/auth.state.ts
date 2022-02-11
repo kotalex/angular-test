@@ -3,12 +3,13 @@ import { State, Action, Selector, StateContext, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { LoginUser, StoreUser } from './auth.actions';
+import { LoginUser, LogoutUser, StoreUser } from './auth.actions';
 import { RolesEnum } from 'src/app/core/enums/roles.enum';
 
 import User from 'src/app/core/models/user.model';
 
 import jwt_decode from "jwt-decode";
+import { ITokenResponse } from 'src/app/core/interfaces/token.response.interface';
 
 export interface AuthStateModel {
     user: User;
@@ -30,19 +31,27 @@ export class AuthState {
     static user(state: AuthStateModel) {
         return state.user;
     }
+
+    @Selector()
+    static loggedIn(state: AuthStateModel) {
+        return !!state.user;
+    }
     
     @Action(LoginUser)
     loginUser(ctx: StateContext<AuthStateModel>, action: LoginUser) {
-        this.authService.loginUser(action.payload)
+        return this.authService.loginUser(action.payload)
             .pipe(
-                tap((result: { token: string }) => {
-                    localStorage.setItem('token', result.token);
-                    
-                    const user: User = jwt_decode(result.token);
-                    ctx.dispatch(new StoreUser(user));
-
-                    const redirectUrl = user.role === RolesEnum.Admin ? 'admin/dashboard' : '/'
-                    ctx.dispatch(new Navigate([redirectUrl]));
+                tap({
+                    next: (result: ITokenResponse) => {
+                        localStorage.setItem('token', result.token);
+                        
+                        const user: User = jwt_decode(result.token);
+                        ctx.dispatch(new StoreUser(user));
+    
+                        const redirectUrl = user.role === RolesEnum.Admin ? 'admin/dashboard' : '/'
+                        ctx.dispatch(new Navigate([redirectUrl]));
+                    },
+                    error: (err)  => console.log(err)
                 })
             )
     }
@@ -52,5 +61,16 @@ export class AuthState {
         ctx.patchState({
             user: action.payload
         });
+    }
+
+    @Action(LogoutUser)
+    logoutUser(ctx: StateContext<AuthStateModel>) {
+        localStorage.removeItem('token');
+
+        ctx.patchState({
+            user: null!
+        });
+
+        ctx.dispatch(new Navigate(['auth/login']));
     }
 }
