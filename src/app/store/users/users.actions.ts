@@ -17,5 +17,5 @@ export class GetUsersFail {
 
 export class SetSingleUser {
     static readonly type = '[Users] Set Single User';
-    constructor(public payload: User | null) {}
+    constructor(public payload: string | null) {}
 }

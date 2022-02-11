@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
 import { Observable } from 'rxjs';
@@ -20,18 +20,19 @@ import { first } from 'rxjs';
 })
 export class CreateEditUserComponent implements OnInit {
   form!: FormGroup;
-  user!: User | null;
+  user!: User;
 
   constructor(
     private store: Store,
     private router: Router,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private usersService: UsersService,
     private snack: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.user = this.store.selectSnapshot(UsersState.single);
+    this.user = this.route.snapshot.data['user'];
     
     this.form = this.formBuilder.group({
       firstName: new FormControl(this.user ? this.user.firstName : '', [Validators.required]),
@@ -48,6 +49,10 @@ export class CreateEditUserComponent implements OnInit {
   }
 
   async onSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+
     let response$: Observable<User>;
 
     if (this.user) {

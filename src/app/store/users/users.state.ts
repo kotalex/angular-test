@@ -9,7 +9,7 @@ import User from 'src/app/core/models/user.model';
 
 export interface UsersStateModel {
     list: User[];
-    single: User | null;
+    single: User;
     loading: boolean;
     loaded: boolean;
 }
@@ -18,7 +18,7 @@ export interface UsersStateModel {
   name: 'users',
   defaults: {
     list: [],
-    single: null,
+    single: null!,
     loading: false,
     loaded: false
   }
@@ -74,6 +74,12 @@ export class UsersState {
 
     @Action(SetSingleUser)
     setSingleUser(ctx: StateContext<UsersStateModel>, action: SetSingleUser) {
-        ctx.patchState({ single: action.payload });
+        if (action.payload) {
+            const single = ctx.getState().list.find((user) => user._id === action.payload);
+
+            ctx.patchState({ single });
+        } else {
+            ctx.patchState({ single: null! });
+        }
     }
 }

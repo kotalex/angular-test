@@ -64,7 +64,6 @@ export class UsersListComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.store.dispatch(new SetSingleUser(user));
     this.router.navigate([`admin/users/${user._id}/edit`]);
   }
 
