@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Mongoose, Types } from 'mongoose';
+import { Model, Mongoose } from 'mongoose';
 import { UsersService } from '../users/users.service';
 import { CreateUpdateTaskDto } from './dto/create-task.dto';
 import { Task, TaskDocument } from './schemas/task.schema';
