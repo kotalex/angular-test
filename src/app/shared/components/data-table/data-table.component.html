@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-title>{{ title }}</mat-card-title>
     <mat-card-title class="add-button" *ngIf="addButton"> 
-        <button [routerLink]="addButton.link" mat-raised-button color="primary" (click)="addButtonClick.emit()">
+        <button mat-raised-button color="primary" (click)="addButtonClick.emit()">
           {{ addButton.text }}
         </button>       
     </mat-card-title>

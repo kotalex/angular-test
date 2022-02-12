@@ -20,6 +20,7 @@ export class UserResolver implements Resolve<User> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
     const users: User[] = this.store.selectSnapshot(UsersState.users);
+
     if (!users.length) {
       return this.store.dispatch(new GetUsers())
         .pipe(

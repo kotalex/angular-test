@@ -49,7 +49,7 @@ export class UsersState {
         return this.usersService.getUsers()
             .pipe(
                 tap({
-                    next: result => ctx.dispatch(new GetUsersSuccess(result)),
+                    next: (result) => ctx.dispatch(new GetUsersSuccess(result)),
                     error: () => ctx.dispatch(new GetUsersFail())
                 })
             );
