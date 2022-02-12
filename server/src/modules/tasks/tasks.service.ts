@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Mongoose } from 'mongoose';
+import { Model, Mongoose, Types } from 'mongoose';
 import { UsersService } from '../users/users.service';
 import { CreateUpdateTaskDto } from './dto/create-task.dto';
 import { Task, TaskDocument } from './schemas/task.schema';
@@ -13,24 +13,30 @@ export class TasksService {
   ) {}
 
   getTasks() {
-    return this.taskModel.find();
+    return this.taskModel.find().populate('user');
   }
 
   getUserTasks(userId: string) {
-    return this.taskModel.find({
-      userId: new new Mongoose().Types.ObjectId(userId),
-    });
+    return this.taskModel
+      .find({
+        userId: new new Mongoose().Types.ObjectId(userId),
+      })
+      .populate('user');
   }
 
   async createTask(dto: CreateUpdateTaskDto) {
+    const task = new this.taskModel(dto);
+
     if (dto.userId) {
       const user = await this.usersService.getUserById(dto.userId);
       if (!user) {
         throw new NotFoundException('User does not exist');
       }
+
+      task.user = user;
     }
 
-    return this.taskModel.create(dto);
+    return task.save();
   }
 
   async updateTask(id: string, dto: CreateUpdateTaskDto) {
@@ -40,16 +46,19 @@ export class TasksService {
       throw new NotFoundException('Task not found');
     }
 
+    task.name = dto.name;
+    task.description = dto.description;
+
     if (dto.userId) {
       const user = await this.usersService.getUserById(dto.userId);
       if (!user) {
         throw new NotFoundException('User does not exist');
       }
+
+      task.user = user;
     }
 
-    await task.update(dto);
-
-    return this.taskModel.findById(id);
+    return task.save();
   }
 
   async deleteTask(id) {

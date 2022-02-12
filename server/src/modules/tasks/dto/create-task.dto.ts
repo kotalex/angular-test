@@ -1,4 +1,5 @@
 export class CreateUpdateTaskDto {
   name: string;
-  userId: string;
+  description?: string;
+  userId?: string;
 }
