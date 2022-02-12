@@ -1,27 +1,22 @@
-# AngularTest
+# Angular Test Project
+The following test application is built using Angular 13.2, backend API using NestJS Framework and MongoDB using Atlas.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
+## Installation
+### Windows
+Run `npm install` or `yarn` to install dependencies for Angular
+then `cd` into `server` folder and run `npm install` or `yarn` to install dependencies for the server.
 
-## Development server
+### Linux (yarn required)
+Run `./install.sh` to install all the dependencies.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Run
+Run `npm start` or `yarn start` to concurrently run both apps.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## App Description
+The app is used for creating and assigning tasks to the users. The app features two user roles: admin and user. Admin can login to the system, create users, create tasks and assign them to the existing users. The users can login to their dashboard and see their assigned tasks.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Credentials
+for admin user login use following credentials:
+email: admin@user.com
+pass: test1234
