@@ -9,6 +9,7 @@ import { GetTasks } from 'src/app/store/tasks/tasks.actions';
 import { TasksState } from 'src/app/store/tasks/tasks.state';
 import Task from 'src/app/core/models/task.model';
 import { CreateEditTaskDialogComponent } from '../create-edit-task-dialog/create-edit-task-dialog.component';
+import { IAddButton } from 'src/app/core/interfaces/add-button.interface';
 
 
 @Component({
@@ -34,8 +35,8 @@ export class TasksListComponent implements OnInit {
     'description'
   ];
 
-  addButton = {
-    link: 'create',
+  addButton: IAddButton = {
+    icon: 'assignment_ind',
     text: 'Add Task'
   }
 

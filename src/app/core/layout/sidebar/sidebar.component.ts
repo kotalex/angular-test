@@ -29,7 +29,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.user$.pipe(
       takeUntil(this.unsubscribe)
     ).subscribe((user: User) => {
-      this.menuItems = user.role === RolesEnum.Admin ? AdminMenuItems : MenuItems;
+      if (user) {
+        this.menuItems = user.role === RolesEnum.Admin ? AdminMenuItems : MenuItems;
+      } else {
+        this.menuItems = [];
+      }
     });
   }
 

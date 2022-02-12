@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { IAddButton } from 'src/app/core/interfaces/add-button.interface';
 
 @Component({
   selector: 'app-data-table',
@@ -13,7 +14,7 @@ export class DataTableComponent implements OnInit {
   @Input('dataSource') data$!: Observable<any[]>;
   @Input('columns') columns!: string[];
   @Input('displayedColumns') displayedColumns!: string[];
-  @Input('addButton') addButton!: { link: string; text: string };
+  @Input('addButton') addButton!: IAddButton;
   @Output() addButtonClick = new EventEmitter<void>();
   @Output() editButtonClick = new EventEmitter<any>();
   @Output() deleteButtonClick = new EventEmitter<any>();

@@ -1,4 +1,15 @@
+@import './../../../../styles.scss';
+
 .menu-item-name {
     vertical-align: super;
     margin-left: 5px;
+}
+
+.mat-list-item.selected {
+    background: mat-color($sidebarPalette);
+    color: mat-color($sidebarPalette, 100) !important;
+
+    &:hover {
+        background: mat-color($sidebarPalette) !important;
+    }
 }

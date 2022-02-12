@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AlertComponent } from './components/alert/alert.component';
 import { DataTableComponent } from './components/data-table/data-table.component';
@@ -44,7 +45,8 @@ const modules = [
   MatInputModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatGridListModule
 ];
 
 

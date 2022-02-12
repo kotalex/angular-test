@@ -11,6 +11,7 @@ import User from 'src/app/core/models/user.model';
 import { first } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IAddButton } from 'src/app/core/interfaces/add-button.interface';
 
 @Component({
   selector: 'app-users-list',
@@ -37,8 +38,8 @@ export class UsersListComponent implements OnInit {
     'role'  
   ];
 
-  addButton = {
-    link: 'create',
+  addButton: IAddButton = {
+    icon: 'person_add',
     text: 'Add User'
   }
 

@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { RolesEnum } from 'src/enums/roles.enum';
@@ -24,7 +25,11 @@ export class TasksController {
 
   @Get()
   @Roles(RolesEnum.Admin, RolesEnum.User)
-  list() {
+  list(@Request() req) {
+    if (req.user.role === RolesEnum.User) {
+      return this.tasksService.getUserTasks(req.user._id);
+    }
+
     return this.tasksService.getTasks();
   }
 

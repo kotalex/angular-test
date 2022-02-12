@@ -36,18 +36,20 @@ $angular-test-theme: mat.define-light-theme((
 @include mat.all-component-themes($angular-test-theme);
 
 /* You can add global styles to this file, and also import other style files */
+$sidebarPalette: mat-palette($mat-indigo);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .success-snackbar {
-  background: rgb(1, 99, 1);
+  background: mat-color($angular-test-primary);
 }
 
 .error-snackbar {
-  background: rgb(158, 10, 10);
+  background: mat-color($angular-test-warn);
 }
 
 .full-width {
   width: 100%;
 }
+

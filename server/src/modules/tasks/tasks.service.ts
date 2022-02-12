@@ -19,7 +19,7 @@ export class TasksService {
   getUserTasks(userId: string) {
     return this.taskModel
       .find({
-        userId: new new Mongoose().Types.ObjectId(userId),
+        user: new new Mongoose().Types.ObjectId(userId),
       })
       .populate('user');
   }
