@@ -52,6 +52,9 @@ let UsersService = class UsersService {
         if (dto.password) {
             dto.password = bcrypt.hashSync(dto.password, 10);
         }
+        else {
+            delete dto.password;
+        }
         const user = await this.userModel.findById(id);
         if (!user) {
             throw new common_1.NotFoundException('User not found');

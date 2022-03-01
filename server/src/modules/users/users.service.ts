@@ -51,6 +51,8 @@ export class UsersService {
 
     if (dto.password) {
       dto.password = bcrypt.hashSync(dto.password, 10);
+    } else {
+      delete dto.password;
     }
 
     const user = await this.userModel.findById(id);

@@ -9,7 +9,7 @@ export interface TasksStateModel {
     list: Task[];
     single: Task;
     loading: boolean;
-    loaded: boolean;      
+    loaded: boolean;
 }
 
 @State<TasksStateModel>({
@@ -25,7 +25,7 @@ export interface TasksStateModel {
 export class TasksState {
     constructor(private tasksService: TasksService) {}
 
-    @Selector() 
+    @Selector()
     static tasks(state: TasksStateModel) {
         return state.list;
     }
@@ -35,7 +35,7 @@ export class TasksState {
         return state.single;
     }
 
-    @Selector() 
+    @Selector()
     static loaded(state: TasksStateModel) {
         return state.loaded;
     }
@@ -56,7 +56,7 @@ export class TasksState {
     @Action(GetTasksSuccess)
     getTasksSuccess(ctx: StateContext<TasksStateModel>, action: GetTasksSuccess) {
         const tasks: Task[] = action.payload.map((task) => {
-            task.userName = `${task.user.firstName} ${task.user.lastName}`;
+            task.userName = task.user ? `${task.user.firstName} ${task.user.lastName}` : '-';
             return task;
         });
 
